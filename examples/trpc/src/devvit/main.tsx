@@ -9,7 +9,6 @@ defineConfig({
   description: 'TRPC Example',
   entry: 'index.html',
   height: 'tall',
-  inline: true,
   menu: {
     enable: true,
     label: 'New TRPC Example Post',
