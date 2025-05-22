@@ -6,7 +6,6 @@ import { defineConfig } from '@devvit/server';
 
 defineConfig({
   name: 'TRPC Example',
-  description: 'TRPC Example',
   entry: 'index.html',
   height: 'tall',
   menu: {
