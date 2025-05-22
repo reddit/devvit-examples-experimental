@@ -13,12 +13,13 @@
     "type-check": "tsc --build"
   },
   "dependencies": {
-    "@devvit/client": "next",
-    "@devvit/public-api": "next",
-    "@devvit/server": "next",
-    "devvit": "next",
-    "@trpc/server": "11.1.2",
+    "@devvit/client": "0.11.16-next-2025-05-21-9df7afc74.0",
+    "@devvit/public-api": "0.11.16-next-2025-05-21-9df7afc74.0",
+    "@devvit/redis": "0.11.16-next-2025-05-21-9df7afc74.0",
+    "@devvit/server": "0.11.16-next-2025-05-21-9df7afc74.0",
     "@trpc/client": "11.1.2",
+    "@trpc/server": "11.1.2",
+    "devvit": "0.11.16-next-2025-05-21-9df7afc74.0",
     "superjson": "2.2.2",
     "zod": "^3.24.4"
   },

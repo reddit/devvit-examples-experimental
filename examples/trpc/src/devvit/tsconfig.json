@@ -10,7 +10,7 @@
 
     "outDir": "../../dist",
 
-    "tsBuildInfoFile": "../../dist/tsconfig.tsbuildinfo",
+    "tsBuildInfoFile": "../../dist/devvit/tsconfig.tsbuildinfo",
 
     // Devvit.
     "jsx": "react",
@@ -18,7 +18,7 @@
     "jsxFragmentFactory": "Devvit.Fragment"
   },
   // https://github.com/Microsoft/TypeScript/issues/25636
-  "include": ["**/*", "../../package.json", "../server/**/*"],
+  "include": ["**/*", "../../package.json",],
   "exclude": ["**/*.test.ts"],
-  "references": [{ "path": "../shared" }]
+  "references": [{ "path": "../server" }, { "path": "../shared" }]
 }
