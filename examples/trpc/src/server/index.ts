@@ -2,7 +2,6 @@ import { createHTTPServer } from '@trpc/server/adapters/standalone';
 import { z } from 'zod';
 import { devvitProcedure, router } from './trpc';
 import { createContext } from './context.js';
-import { getRedis } from '@devvit/redis';
 
 const appRouter = router({
   init: devvitProcedure.query(async ({ ctx }) => {
@@ -11,8 +10,8 @@ const appRouter = router({
     };
   }),
   counter: {
-    get: devvitProcedure.query(async () => {
-      const resp = await getRedis().get('counter');
+    get: devvitProcedure.query(async ({ ctx }) => {
+      const resp = await ctx.devvit.redis.get('counter');
       return resp ? parseInt(resp) : 0;
     }),
     increment: devvitProcedure
@@ -21,8 +20,8 @@ const appRouter = router({
           amount: z.number().positive().default(1),
         })
       )
-      .mutation(async ({  input }) => {
-        const resp = await getRedis().incrby('counter', input.amount);
+      .mutation(async ({ ctx, input }) => {
+        const resp = await ctx.devvit.redis.incrBy('counter', input.amount);
         return resp;
       }),
     decrement: devvitProcedure
@@ -31,8 +30,8 @@ const appRouter = router({
           amount: z.number().negative().default(-1),
         })
       )
-      .mutation(async ({ input }) => {
-        const resp = await getRedis().incrby('counter', input.amount);
+      .mutation(async ({ ctx, input }) => {
+        const resp = await ctx.devvit.redis.incrBy('counter', input.amount);
         return resp;
       }),
   },
