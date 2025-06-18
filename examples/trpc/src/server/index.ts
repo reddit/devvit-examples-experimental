@@ -2,19 +2,18 @@ import { createHTTPHandler } from '@trpc/server/adapters/standalone';
 import { z } from 'zod';
 import { publicProcedure, router } from './trpc';
 import { createContext } from './context.js';
-import { createServer, getContext, getServerPort } from '@devvit/server';
-import { getRedis } from '@devvit/redis';
+import { createServer, context, getServerPort } from '@devvit/server';
+import { redis } from '@devvit/redis';
 
 const appRouter = router({
   init: publicProcedure.query(async () => {
-    const { postId } = getContext();
+    const { postId } = context;
     return {
       postId,
     };
   }),
   counter: {
     get: publicProcedure.query(async () => {
-      const redis = getRedis();
       const resp = await redis.get('counter');
       return resp ? parseInt(resp) : 0;
     }),
@@ -25,7 +24,6 @@ const appRouter = router({
         })
       )
       .mutation(async ({ input }) => {
-        const redis = getRedis();
         const resp = await redis.incrBy('counter', input.amount);
         return resp;
       }),
@@ -36,7 +34,6 @@ const appRouter = router({
         })
       )
       .mutation(async ({ input }) => {
-        const redis = getRedis();
         const resp = await redis.incrBy('counter', input.amount);
         return resp;
       }),
