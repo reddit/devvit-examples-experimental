@@ -2,8 +2,7 @@ import { createHTTPHandler } from '@trpc/server/adapters/standalone';
 import { z } from 'zod';
 import { publicProcedure, router } from './trpc';
 import { createContext } from './context.js';
-import { createServer, context, getServerPort } from '@devvit/server';
-import { redis } from '@devvit/redis';
+import { createServer, context, getServerPort, redis } from '@devvit/web/server';
 
 const appRouter = router({
   init: publicProcedure.query(async () => {
