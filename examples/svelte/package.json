@@ -1,0 +1,48 @@
+{
+	"private": true,
+	"name": "devvit-svelte-example",
+	"version": "0.0.0",
+	"license": "BSD-3-Clause",
+	"type": "module",
+	"scripts": {
+		"postinstall": "npm run build",
+		"build:client": "cd src/client && vite build",
+		"build:server": "cd src/server && vite build",
+		"build": "npm run build:client && npm run build:server",
+		"deploy": "npm run build && devvit upload",
+		"dev": "concurrently -k -p \"[{name}]\" -n \"CLIENT,SERVER,DEVVIT\" -c \"blue,green,magenta\" \"npm run dev:client\" \"npm run dev:server\" \"npm run dev:devvit\"",
+		"dev:client": "cd src/client && vite build --watch",
+		"dev:devvit": "dotenv -e .env -- devvit playtest devvitExamplesExp",
+		"dev:server": "cd src/server && vite build --watch",
+		"login": "devvit login",
+		"check": "svelte-check --tsconfig ./src/client/tsconfig.json",
+		"launch": "npm run build && npm run deploy && devvit publish",
+		"type-check": "tsc --build"
+	},
+	"dependencies": {
+		"@devvit/web": "0.12.0",
+		"devvit": "0.12.0",
+		"express": "5.1.0"
+	},
+	"devDependencies": {
+		"@types/express": "5.0.1",
+		"concurrently": "9.1.2",
+		"dotenv-cli": "8.0.0",
+		"typescript": "5.8.2",
+		"@eslint/compat": "^1.2.5",
+		"@eslint/js": "^9.18.0",
+		"@sveltejs/adapter-auto": "^6.0.0",
+		"eslint": "^9.18.0",
+		"eslint-config-prettier": "^10.0.1",
+		"eslint-plugin-svelte": "^3.0.0",
+		"globals": "^16.0.0",
+		"prettier": "^3.4.2",
+		"prettier-plugin-svelte": "^3.3.3",
+		"typescript-eslint": "^8.20.0",
+		"@sveltejs/vite-plugin-svelte": "^6.1.1",
+		"@tsconfig/svelte": "^5.0.4",
+		"svelte": "^5.38.1",
+		"svelte-check": "^4.3.1",
+		"vite": "^7.1.2"
+	}
+}
